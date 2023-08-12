@@ -1,0 +1,29 @@
+{
+  "name": "westonstore-base",
+  "version": "0.1.0-beta",
+  "license": "UNLICENSED",
+  "description": "Westonstore Theme",
+  "devDependencies": {
+    "gulp-foreach": "^0.1.0",
+    "gulp-install": "^1.1.0",
+    "gulp-mode": "^1.1.0",
+    "gulp-sass": "^5.1.0",
+    "sass": "^1.57.1"
+  },
+  "dependencies": {
+    "gulp": "^4.0.2",
+    "gulp-rename": "^2.0.0",
+    "node-sass": "^8.0.0",
+    "webpack": "^5.88.2",
+    "webpack-stream": "^7.0.0"
+  },
+  "config": {
+    "dev": "westonstoreco"
+  },
+  "scripts": {
+    "lint:liquid": "shopify theme check",
+    "dev": "shopify theme dev --store=$npm_package_config_dev",
+    "watch": "gulp watch",
+    "build": "gulp build"
+  }
+}
