@@ -1,3 +1,5 @@
+{{ 'featured-products.min.css' | asset_url | stylesheet_tag }}
+
 {% assign section_id = section.id %}
 {% assign collection = section.settings.collection %}
 {% assign title = section.settings.title %}
@@ -17,7 +19,7 @@
 {% if collection != blank and collection.products.size > 0 %}
     <div class="page-width">
         {% if title != blank %}
-            <h2 class="title">{{ title }}</h2>
+            <h2 class="featured-products__title">{{ title }}</h2>
         {% endif %}
 
         <div class="featured-products__inner">
@@ -35,7 +37,19 @@
         </div>
     </div>
 {% endif %}
+<style>
+    #shopify-section-{{section.id}} {
+        padding-top: {{ section.settings.mobile_top_space }}px;
+        padding-bottom: {{ section.settings.mobile_bottom_space }}px;
+    }
 
+    @media only screen and (min-width: 1024px){
+        #shopify-section-{{section.id}} {
+            padding-top: {{ section.settings.top_space }}px;
+            padding-bottom: {{ section.settings.bottom_space }}px;
+        }
+    }
+</style>
 {% schema %}
 {
   "name": "Featured Products",
@@ -60,7 +74,51 @@
       "step": 1,
       "label": "Products per show",
       "default": 4
-    }
+    },
+    {
+        "type": "header",
+        "content": "Section Spaces"
+      },
+    {
+        "type": "range",
+        "id": "top_space",
+        "min": 0,
+        "max": 100,
+        "step": 1,
+        "unit": "px",
+        "label": "Section top padding",
+        "default": 0
+      }, 
+      {
+        "type": "range",
+        "id": "bottom_space",
+        "min": 0,
+        "max": 100,
+        "step": 1,
+        "unit": "px",
+        "label": "Section bottom padding",
+        "default": 0
+      },
+      {
+        "type": "range",
+        "id": "mobile_top_space",
+        "min": 0,
+        "max": 100,
+        "step": 1,
+        "unit": "px",
+        "label": "Section mobile top padding",
+        "default": 30
+      }, 
+      {
+        "type": "range",
+        "id": "mobile_bottom_space",
+        "min": 0,
+        "max": 100,
+        "step": 1,
+        "unit": "px",
+        "label": "Section mobile bottom padding",
+        "default": 30
+      }
   ],
   "presets": [
     {
