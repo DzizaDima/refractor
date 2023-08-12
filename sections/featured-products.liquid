@@ -1,0 +1,71 @@
+{% assign section_id = section.id %}
+{% assign collection = section.settings.collection %}
+{% assign title = section.settings.title %}
+{% assign products_per_show = section.settings.products_per_show %}
+{% assign products_in_cart = '' %}
+{% assign index = 1 %}
+
+{% for item in cart.items %}
+    {% if forloop.first %}
+        {% assign products_in_cart = item.product_id %}
+    {% else %}
+        {% assign products_in_cart = products_in_cart | append: ',' | append: item.product_id %}
+    {% endif %}
+{% endfor %}
+{% assign products_in_cart = products_in_cart | split: ',' %}
+
+{% if collection != blank and collection.products.size > 0 %}
+    <div class="page-width">
+        {% if title != blank %}
+            <h2 class="title">{{ title }}</h2>
+        {% endif %}
+
+        <div class="featured-products__inner">
+            {% for product in collection.products %}
+                {% if index <= products_per_show %}
+                    {% assign product_id = product.id | append: '' %}
+                    {% unless products_in_cart contains product_id %}
+                        {% assign index = index | plus: 1 %}
+                        {% render 'featured-products-product-card', product: product, section_id: section_id %}
+                    {% endunless %}
+                {% else %}
+                    {% break %}
+                {% endif %}
+            {% endfor %}
+        </div>
+    </div>
+{% endif %}
+
+{% schema %}
+{
+  "name": "Featured Products",
+  "tag": "section",
+  "class": "section featured-products",
+  "settings": [
+    {
+        "type": "text",
+        "id": "title",
+        "label": "Title"
+    },
+    {
+      "type": "collection",
+      "id": "collection",
+      "label": "Collection"
+    },
+    {
+      "type": "range",
+      "id": "products_per_show",
+      "min": 1,
+      "max": 10,
+      "step": 1,
+      "label": "Products per show",
+      "default": 4
+    }
+  ],
+  "presets": [
+    {
+      "name": "Featured Products"
+    }
+  ]
+}
+{% endschema %}

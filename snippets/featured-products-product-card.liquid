@@ -1,0 +1,14 @@
+<div class="featured-products-product-card">
+    <div class="image-wrapper">
+        {% if product.featured_image != blank %}
+            {{ product.featured_image | image_url: width: 600 | image_tag }}
+        {% else %}
+            {{ 'product-apparel-2' | placeholder_svg_tag: 'placeholder-svg' }}
+        {% endif %}
+    </div>
+    <h3 class="title">{{ product.title }}</h3>
+    <div class="add-to-cart">
+        {% assign product_form_id = 'quick-add-' | append: section_id | append: product.id %}
+        {% render 'add-to-cart-form', product: product, product_form_id: product_form_id, section_id: section_id %}
+    </div>
+</div>
