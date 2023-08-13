@@ -1,4 +1,8 @@
 .featured-products{
+    &.hidden{
+        display: none;
+    }
+
     &__title{
         padding: 0 16px;
         color: #367488;
@@ -29,6 +33,7 @@
             justify-items: center;
             gap: 30px;
             margin-top: 30px;
+            position: relative;
 
             @media screen and (min-width: 768px) {
                 grid-template-columns: 1fr 1fr;
@@ -115,6 +120,26 @@
                             display: none;
                         }
                     }
+                }
+            }
+
+            .loader{
+                display: none;
+                position: absolute;
+                left: 0;
+                top: 0;
+                width: 100%;
+                height: 100%;
+                background-color: #00000040;
+                justify-content: center;
+                align-items: center;
+                
+                svg{
+                    width: 10%;
+                }
+    
+                &.active{
+                    display: flex;
                 }
             }
         }

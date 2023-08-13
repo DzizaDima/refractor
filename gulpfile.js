@@ -15,17 +15,14 @@ gulp.task('sass', function() {
 
 gulp.task('js', function() {
   return gulp.src('./components/**/*.js')
-    .pipe(foreach(function(stream, file){
-      const filename = path.basename(file.path, '.js');
-      return stream
-        .pipe(
-          webpack({
-            mode: mode.development() ? 'development' : 'production',
-            watch: mode.development(),
-          })
-        )
-        .pipe(rename({ suffix: '.min', dirname: '', basename: filename }))
-    }))
+  .pipe(
+    webpack({
+      mode: mode.development() ? 'development' : 'production',
+      watch: mode.development(),
+    })
+  )
+  .pipe(rename({ suffix: '.min', dirname: '' }))
+ 
     .pipe(gulp.dest('assets'))
 });
 
