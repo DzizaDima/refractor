@@ -24,7 +24,7 @@ function updateSection(section){
                 let sectionInnerNew = doc.querySelector('.featured-products__inner')
 
                 if(checkCardsAmount(sectionNew, section)){
-                    sectionNew.querySelector('.featured-products__inner').innerHTML = sectionInnerNew.innerHTML
+                    section.querySelector('.featured-products__inner').innerHTML = sectionInnerNew.innerHTML
                 }
             })
             .catch(function (err) {
